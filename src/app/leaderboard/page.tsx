@@ -95,7 +95,10 @@ export default function LeaderboardPage() {
         {/* Leaderboard List */}
         {loading ? (
           <div className="text-center py-12">
-            <div className="animate-pulse text-lg">Loading...</div>
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse mb-4">
+              <Trophy className="h-8 w-8 text-white" />
+            </div>
+            <p className="text-lg font-medium opacity-70">Loading leaderboard...</p>
           </div>
         ) : sortedProfiles.length === 0 ? (
           <div className="card text-center py-12">
@@ -107,14 +110,16 @@ export default function LeaderboardPage() {
               <Link
                 key={p.slug}
                 href={`/profile/${p.slug}`}
-                className="card block p-4 hover:border-purple-500 transition-colors group"
+                className={`card block p-4 hover:border-purple-500 transition-all group ${
+                  i < 3 ? "hover:scale-[1.02]" : ""
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold ${
-                      i === 0 ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30" :
-                      i === 1 ? "bg-gray-100 text-gray-600 dark:bg-gray-800" :
-                      i === 2 ? "bg-orange-100 text-orange-600 dark:bg-orange-900/30" :
+                    <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold transition-transform group-hover:scale-110 ${
+                      i === 0 ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 ring-2 ring-yellow-400/50" :
+                      i === 1 ? "bg-gray-100 text-gray-600 dark:bg-gray-800 ring-2 ring-gray-400/50" :
+                      i === 2 ? "bg-orange-100 text-orange-600 dark:bg-orange-900/30 ring-2 ring-orange-400/50" :
                       "bg-gray-50 text-gray-500 dark:bg-gray-900"
                     }`}>
                       #{i + 1}

@@ -43,13 +43,18 @@
 }
 
 /* Minimal reset and base styles */
-html,
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
   height: 100%;
   margin: 0;
   padding: 0;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
@@ -73,7 +78,7 @@ body {
   }
 
   .card {
-    @apply border rounded-xl bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800;
+    @apply border rounded-xl bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow;
   }
 
   .btn-primary {

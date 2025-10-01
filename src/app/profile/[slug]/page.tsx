@@ -72,7 +72,12 @@ export default function ProfilePage() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 flex items-center justify-center">
-        <div className="animate-pulse text-lg">Loading...</div>
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse">
+            <Star className="h-8 w-8 text-white" />
+          </div>
+          <p className="text-lg font-medium opacity-70">Loading profile...</p>
+        </div>
       </main>
       <SiteFooter />
     </div>

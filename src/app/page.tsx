@@ -55,27 +55,27 @@ export default function HomePage() {
         <section className="section border-t border-gray-200 dark:border-gray-800">
           <div className="container-page">
             <div className="grid sm:grid-cols-3 gap-8">
-              <div className="text-center space-y-3">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30">
-                  <Shield className="h-6 w-6 text-purple-600" />
+              <div className="text-center space-y-3 p-6 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors group">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 group-hover:scale-110 transition-transform">
+                  <Shield className="h-7 w-7 text-purple-600 dark:text-purple-400" />
                 </div>
-                <h3 className="font-semibold">100% Anonymous</h3>
+                <h3 className="font-semibold text-lg">100% Anonymous</h3>
                 <p className="text-sm opacity-70">Your identity is never shared. Rate freely and honestly.</p>
               </div>
               
-              <div className="text-center space-y-3">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-pink-100 dark:bg-pink-900/30">
-                  <Sparkles className="h-6 w-6 text-pink-600" />
+              <div className="text-center space-y-3 p-6 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors group">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-pink-100 dark:bg-pink-900/30 group-hover:scale-110 transition-transform">
+                  <Sparkles className="h-7 w-7 text-pink-600 dark:text-pink-400" />
                 </div>
-                <h3 className="font-semibold">Real Reviews</h3>
+                <h3 className="font-semibold text-lg">Real Reviews</h3>
                 <p className="text-sm opacity-70">See what others really think with verified ratings.</p>
               </div>
               
-              <div className="text-center space-y-3">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30">
-                  <TrendingUp className="h-6 w-6 text-blue-600" />
+              <div className="text-center space-y-3 p-6 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors group">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 group-hover:scale-110 transition-transform">
+                  <TrendingUp className="h-7 w-7 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="font-semibold">Live Rankings</h3>
+                <h3 className="font-semibold text-lg">Live Rankings</h3>
                 <p className="text-sm opacity-70">Discover top-rated profiles updated in real-time.</p>
               </div>
             </div>
