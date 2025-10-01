@@ -164,7 +164,7 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+          className="input"
           placeholder="e.g., Jane Doe"
           required
         />
@@ -178,7 +178,7 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
           id="review-rating"
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+          className="input"
         >
           <option value={5}>⭐️⭐️⭐️⭐️⭐️ (5 - Amazing)</option>
           <option value={4}>⭐️⭐️⭐️⭐️ (4 - Great)</option>
@@ -197,7 +197,7 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           rows={4}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors resize-none"
+          className="input resize-none"
           placeholder="Share your experience... (max 500 characters)"
           maxLength={500}
         />
@@ -226,7 +226,7 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
 
       <button
         type="submit"
-        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+        className="btn-primary w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={submitting || !token}
       >
         {submitting ? "Submitting..." : "Submit Review"}

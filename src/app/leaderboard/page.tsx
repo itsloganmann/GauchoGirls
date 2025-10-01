@@ -44,7 +44,7 @@ export default function LeaderboardPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
-      <main className="flex-1 mx-auto max-w-5xl px-4 py-8 w-full">
+      <main className="flex-1 container-page px-4 py-8 w-full">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">🏆 Leaderboard</h1>
           <p className="opacity-70">Discover the top-rated profiles</p>
@@ -58,7 +58,7 @@ export default function LeaderboardPage() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 sortBy === "rating"
                   ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
-                  : "border hover:bg-gray-100 dark:hover:bg-gray-800"
+                  : "border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
               }`}
             >
               <Trophy className="h-4 w-4" />
@@ -69,7 +69,7 @@ export default function LeaderboardPage() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 sortBy === "count"
                   ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
-                  : "border hover:bg-gray-100 dark:hover:bg-gray-800"
+                  : "border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
               }`}
             >
               <TrendingUp className="h-4 w-4" />
@@ -82,7 +82,7 @@ export default function LeaderboardPage() {
             <select
               value={minReviews}
               onChange={(e) => setMinReviews(Number(e.target.value))}
-              className="px-3 py-1 rounded-lg border bg-white dark:bg-gray-900"
+              className="px-3 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900"
             >
               <option value={1}>1+</option>
               <option value={3}>3+</option>
@@ -98,7 +98,7 @@ export default function LeaderboardPage() {
             <div className="animate-pulse text-lg">Loading...</div>
           </div>
         ) : sortedProfiles.length === 0 ? (
-          <div className="text-center py-12 border rounded-xl">
+          <div className="card text-center py-12">
             <p className="opacity-70">No profiles match your filters</p>
           </div>
         ) : (
@@ -107,7 +107,7 @@ export default function LeaderboardPage() {
               <Link
                 key={p.slug}
                 href={`/profile/${p.slug}`}
-                className="block border rounded-xl p-4 hover:border-purple-500 transition-colors group"
+                className="card block p-4 hover:border-purple-500 transition-colors group"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">

@@ -81,7 +81,7 @@ export default function ProfilePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
-      <main className="flex-1 mx-auto max-w-5xl px-4 py-8">
+      <main className="flex-1 container-page px-4 py-8">
         {/* Profile Header */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -98,7 +98,7 @@ export default function ProfilePage() {
             </div>
             <button
               onClick={handleShare}
-              className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               <Share2 className="h-4 w-4" />
               Share
@@ -110,7 +110,7 @@ export default function ProfilePage() {
         {profile ? (
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Rating Card */}
-            <div className="border rounded-xl p-6">
+            <div className="card p-6">
               <h3 className="text-sm font-medium opacity-70 mb-4">Overall Rating</h3>
               <div className="flex items-end gap-3 mb-6">
                 <div className="text-5xl font-bold">{Number(profile.avg_rating).toFixed(1)}</div>
@@ -127,20 +127,20 @@ export default function ProfilePage() {
             </div>
 
             {/* Rating Distribution */}
-            <div className="border rounded-xl p-6">
+            <div className="card p-6">
               <h3 className="text-sm font-medium opacity-70 mb-4">Rating Distribution</h3>
               <RatingDistribution distribution={ratingDistribution} />
             </div>
           </div>
         ) : (
-          <div className="border rounded-xl p-8 text-center mb-8">
+          <div className="card p-8 text-center mb-8">
             <p className="text-lg mb-2">No reviews yet</p>
             <p className="text-sm opacity-70">Be the first to rate {displayName}!</p>
           </div>
         )}
 
         {/* Review Form */}
-        <div className="border rounded-xl p-6 mb-8">
+        <div className="card p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-6">Submit a Review</h2>
           <ReviewForm
             defaultName={displayName}
@@ -158,7 +158,7 @@ export default function ProfilePage() {
           ) : (
             <div className="space-y-4">
               {reviews.map((r) => (
-                <div key={r.id} className="border rounded-xl p-6">
+                <div key={r.id} className="card p-6">
                   <div className="flex items-center gap-2 mb-3">
                     {[...Array(5)].map((_, i) => (
                       <Star

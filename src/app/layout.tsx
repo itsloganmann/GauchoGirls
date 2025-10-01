@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-screen font-sans antialiased">
+    <html lang="en" suppressHydrationWarning className={GeistSans.className}>
+      <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="light">
           {children}
           <Toaster position="bottom-right" />

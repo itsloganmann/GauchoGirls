@@ -19,8 +19,8 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 glass border-b">
-      <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-4">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-black/30 border-b border-gray-200 dark:border-gray-800">
+      <div className="container-page px-4 py-3 flex items-center gap-4">
         <Link href="/" className="text-xl font-bold hover:opacity-80 transition-opacity flex-shrink-0">
           🦝🌴 GauchoGirls
         </Link>
@@ -51,8 +51,8 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t mt-auto">
-      <div className="mx-auto max-w-5xl px-4 py-6">
+    <footer className="border-t border-gray-200 dark:border-gray-800 mt-auto">
+      <div className="container-page px-4 py-6">
         <nav className="flex flex-wrap gap-x-4 gap-y-2 text-sm mb-4">
           <Link href="/tos" className="hover:text-purple-600 transition-colors">
             TOS

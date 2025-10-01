@@ -8,12 +8,12 @@ export default function HomePage() {
       <SiteHeader />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative px-4 py-20 sm:py-32">
-          <div className="absolute inset-0 -z-10 opacity-30">
+        <section className="relative section">
+          <div className="absolute inset-0 -z-10 opacity-25">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-500/20" />
           </div>
           
-          <div className="mx-auto max-w-4xl text-center space-y-8">
+          <div className="container-hero space-y-8">
             <h1 className="text-5xl sm:text-7xl font-bold tracking-tight">
               <span className="block">🦝🌴</span>
               <span className="gradient-text">GauchoGirls</span>
@@ -27,11 +27,8 @@ export default function HomePage() {
               Like RateMyProfessor, but for IV guys to rate IV girls
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link
-                href="/leaderboard"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity shadow-lg"
-              >
+            <div className="flex justify-center pt-4">
+              <Link href="/leaderboard" className="btn-primary px-8 py-4 gap-2">
                 <TrendingUp className="h-5 w-5" />
                 View Leaderboard
               </Link>
@@ -47,7 +44,7 @@ export default function HomePage() {
                   type="text"
                   required
                   placeholder="Search for a name..."
-                  className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:outline-none focus:border-purple-500 transition-colors text-lg"
+                  className="input pl-12 text-lg"
                 />
               </div>
             </form>
@@ -55,8 +52,8 @@ export default function HomePage() {
         </section>
 
         {/* Features */}
-        <section className="px-4 py-16 border-t">
-          <div className="mx-auto max-w-5xl">
+        <section className="section border-t border-gray-200 dark:border-gray-800">
+          <div className="container-page">
             <div className="grid sm:grid-cols-3 gap-8">
               <div className="text-center space-y-3">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30">

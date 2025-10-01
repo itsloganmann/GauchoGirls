@@ -26,6 +26,20 @@
     --border: 0 0% 20%;
     --input: 0 0% 20%;
   }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input, select, textarea, button {
+    font: inherit;
+  }
 }
 
 /* Minimal reset and base styles */
@@ -56,5 +70,31 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  .card {
+    @apply border rounded-xl bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center font-semibold rounded-lg text-white
+           bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 transition-opacity shadow-lg;
+  }
+
+  .input {
+    @apply w-full rounded-lg border-2 border-gray-300 dark:border-gray-700
+           bg-white dark:bg-gray-900 px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors;
+  }
+
+  .section {
+    @apply px-4 py-16;
+  }
+
+  .container-hero {
+    @apply mx-auto max-w-4xl text-center;
+  }
+
+  .container-page {
+    @apply mx-auto max-w-5xl;
   }
 }
