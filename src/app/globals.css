@@ -2,14 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design System - CSS Variables */
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    
+    /* Brand gradients */
+    --gradient-from: 280 100% 70%;
+    --gradient-to: 200 100% 60%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+  }
+}
+
 /* Minimal reset and base styles */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Utility classes */
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .glass {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
 }

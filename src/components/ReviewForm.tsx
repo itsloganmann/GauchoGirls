@@ -154,62 +154,79 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className="block text-sm mb-1" htmlFor="review-name">Name</label>
+        <label className="block text-sm font-medium mb-2 opacity-70" htmlFor="review-name">
+          Name
+        </label>
         <input
           id="review-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
           placeholder="e.g., Jane Doe"
           required
         />
       </div>
 
       <div>
-        <label className="block text-sm mb-1" htmlFor="review-rating">Rating</label>
+        <label className="block text-sm font-medium mb-2 opacity-70" htmlFor="review-rating">
+          Rating
+        </label>
         <select
           id="review-rating"
           value={rating}
           onChange={(e) => setRating(Number(e.target.value))}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
         >
-          <option value={5}>⭐️⭐️⭐️⭐️⭐️ (5)</option>
-          <option value={4}>⭐️⭐️⭐️⭐️ (4)</option>
-          <option value={3}>⭐️⭐️⭐️ (3)</option>
-          <option value={2}>⭐️⭐️ (2)</option>
-          <option value={1}>⭐️ (1)</option>
+          <option value={5}>⭐️⭐️⭐️⭐️⭐️ (5 - Amazing)</option>
+          <option value={4}>⭐️⭐️⭐️⭐️ (4 - Great)</option>
+          <option value={3}>⭐️⭐️⭐️ (3 - Good)</option>
+          <option value={2}>⭐️⭐️ (2 - Okay)</option>
+          <option value={1}>⭐️ (1 - Poor)</option>
         </select>
       </div>
 
       <div>
-        <label className="block text-sm mb-1" htmlFor="review-comment">Comment (optional)</label>
+        <label className="block text-sm font-medium mb-2 opacity-70" htmlFor="review-comment">
+          Comment (optional)
+        </label>
         <textarea
           id="review-comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           rows={4}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Share more details (max 500 characters)"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors resize-none"
+          placeholder="Share your experience... (max 500 characters)"
           maxLength={500}
         />
+        <p className="text-xs opacity-50 mt-1">{comment.length}/500</p>
       </div>
 
       <div>
         <div ref={widgetContainerRef} className="cf-turnstile" data-sitekey={siteKey} />
         {!siteKey && (
-          <p className="text-xs text-red-600 mt-1">Turnstile site key missing. Set NEXT_PUBLIC_TURNSTILE_SITE_KEY.</p>
+          <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+            Turnstile site key missing. Set NEXT_PUBLIC_TURNSTILE_SITE_KEY.
+          </p>
         )}
       </div>
 
-      {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-      {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+      {errorMessage && (
+        <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+          <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
+        </div>
+      )}
+      {successMessage && (
+        <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+          <p className="text-sm text-green-600 dark:text-green-400">{successMessage}</p>
+        </div>
+      )}
 
       <button
         type="submit"
-        className="w-full bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition-colors font-medium disabled:opacity-50"
+        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
         disabled={submitting || !token}
       >
         {submitting ? "Submitting..." : "Submit Review"}
