@@ -2,97 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design System - CSS Variables */
+/* Modern Design System - Enhanced CSS Variables */
 @layer base {
   :root {
-    /* Light theme */
+    /* Light theme - Modern palette */
     --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    --foreground: 0 0% 9%;
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 9%;
+    --radius: 0.75rem;
     
-    /* Brand gradients */
-    --gradient-from: 280 100% 70%;
-    --gradient-to: 200 100% 60%;
+    /* Modern brand gradients */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    
+    /* Shadows for depth */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 
   .dark {
-    --background: 0 0% 10%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 83%;
+    
+    /* Dark mode shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
   }
 
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
   }
 
-  a {
-    text-decoration: none;
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  input, select, textarea, button {
-    font: inherit;
+  * {
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
+
+  /* Selection styling */
+  ::selection {
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
   }
 }
 
-/* Minimal reset and base styles */
-html {
-  height: 100%;
-  scroll-behavior: smooth;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: hsl(var(--background));
-  color: hsl(var(--foreground));
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* Utility classes */
+/* Modern Utility Classes */
 @layer utilities {
+  /* Gradient text effects */
   .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+  
+  .gradient-text-secondary {
+    background: var(--gradient-secondary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   
+  /* Modern glass morphism */
   .glass {
     background: hsl(var(--background) / 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid hsl(var(--border) / 0.3);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.2);
   }
 
+  /* Enhanced card styles */
   .card {
-    @apply border rounded-xl bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow;
+    @apply bg-white dark:bg-gray-900/50 border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ease-out backdrop-blur-sm;
+  }
+  
+  .card-hover {
+    @apply card hover:scale-[1.02] hover:shadow-xl hover:border-purple-200 dark:hover:border-purple-800/50;
   }
 
+  /* Modern button styles */
   .btn-primary {
-    @apply inline-flex items-center justify-center font-semibold rounded-lg text-white
-           bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 transition-opacity shadow-lg;
+    @apply inline-flex items-center justify-center font-semibold rounded-xl text-white px-6 py-3
+           bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 
+           hover:from-purple-700 hover:via-purple-800 hover:to-pink-700
+           active:scale-95 transition-all duration-200 ease-out
+           shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center font-medium rounded-xl px-6 py-3
+           bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100
+           hover:bg-gray-200 dark:hover:bg-gray-700 
+           active:scale-95 transition-all duration-200 ease-out
+           border border-gray-200 dark:border-gray-700;
   }
 
+  /* Modern input styles */
   .input {
-    @apply w-full rounded-lg border-2 border-gray-300 dark:border-gray-700
-           bg-white dark:bg-gray-900 px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors;
+    @apply w-full rounded-xl border-2 border-gray-200 dark:border-gray-700
+           bg-white/50 dark:bg-gray-900/50 px-4 py-3 
+           focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10
+           transition-all duration-200 ease-out backdrop-blur-sm
+           placeholder:text-gray-400 dark:placeholder:text-gray-500;
   }
 
+  /* Layout containers */
   .section {
-    @apply px-4 py-16;
+    @apply px-4 py-20 sm:py-24;
   }
 
   .container-hero {
@@ -100,6 +160,67 @@ body {
   }
 
   .container-page {
-    @apply mx-auto max-w-5xl;
+    @apply mx-auto max-w-6xl;
   }
+  
+  /* Modern animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 ease-out hover:shadow-2xl hover:shadow-purple-500/25;
+  }
+}
+
+/* Keyframe animations */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
 }

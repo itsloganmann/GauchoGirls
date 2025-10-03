@@ -2,7 +2,7 @@
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { Star, Share2, TrendingUp, Calendar } from "lucide-react";
+import { Star, Share2, TrendingUp, Calendar, User, MessageCircle, Award } from "lucide-react";
 import { toast } from "react-hot-toast";
 import ReviewForm from "@/components/ReviewForm";
 import RatingDistribution from "@/components/RatingDistribution";
@@ -69,14 +69,17 @@ export default function ProfilePage() {
   }, [reviews]);
 
   if (loading) return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/10">
       <SiteHeader />
       <main className="flex-1 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse">
-            <Star className="h-8 w-8 text-white" />
+        <div className="text-center space-y-6 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse shadow-xl">
+            <User className="h-10 w-10 text-white" />
           </div>
-          <p className="text-lg font-medium opacity-70">Loading profile...</p>
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Loading Profile</h3>
+            <p className="text-gray-600 dark:text-gray-400">Fetching the latest information...</p>
+          </div>
         </div>
       </main>
       <SiteFooter />
@@ -84,69 +87,113 @@ export default function ProfilePage() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/10">
       <SiteHeader />
-      <main className="flex-1 container-page px-4 py-8">
+      <main className="flex-1 container-page px-6 py-12">
         {/* Profile Header */}
-        <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">{displayName}</h1>
-              {profile && (
-                <div className="flex items-center gap-4 text-sm opacity-70">
-                  <span className="flex items-center gap-1">
-                    <TrendingUp className="h-4 w-4" />
-                    {profile.review_count} reviews
-                  </span>
-                </div>
-              )}
-            </div>
-            <button
-              onClick={handleShare}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            >
-              <Share2 className="h-4 w-4" />
-              Share
-            </button>
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-6 shadow-xl">
+            <User className="h-12 w-12" />
+          </div>
+          
+          <div className="space-y-4">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">
+              {displayName}
+            </h1>
+            
+            {profile && (
+              <div className="flex items-center justify-center gap-6 text-gray-600 dark:text-gray-400">
+                <span className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  {profile.review_count} reviews
+                </span>
+                <button
+                  onClick={handleShare}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 hover-lift"
+                >
+                  <Share2 className="h-4 w-4" />
+                  Share Profile
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Stats Grid */}
         {profile ? (
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {/* Rating Card */}
-            <div className="card p-6">
-              <h3 className="text-sm font-medium opacity-70 mb-4">Overall Rating</h3>
-              <div className="flex items-end gap-3 mb-6">
-                <div className="text-5xl font-bold">{Number(profile.avg_rating).toFixed(1)}</div>
-                <div className="flex pb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-6 w-6 ${i < Math.round(profile.avg_rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                    />
-                  ))}
+          <div className="grid lg:grid-cols-2 gap-8 mb-12 animate-slide-up">
+            {/* Overall Rating Card */}
+            <div className="card p-8 text-center space-y-6">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Overall Rating
+                </h3>
+                <div className="text-6xl font-bold text-gray-900 dark:text-white">
+                  {Number(profile.avg_rating).toFixed(1)}
                 </div>
               </div>
-              <p className="text-sm opacity-70">{profile.review_count} total reviews</p>
+              
+              <div className="flex justify-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`h-8 w-8 ${
+                      i < Math.round(profile.avg_rating) 
+                        ? "fill-yellow-400 text-yellow-400" 
+                        : "text-gray-300 dark:text-gray-600"
+                    }`}
+                  />
+                ))}
+              </div>
+              
+              <div className="space-y-1">
+                <p className="text-lg font-medium text-gray-900 dark:text-white">
+                  {profile.review_count} total reviews
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Based on authentic experiences
+                </p>
+              </div>
             </div>
 
-            {/* Rating Distribution */}
-            <div className="card p-6">
-              <h3 className="text-sm font-medium opacity-70 mb-4">Rating Distribution</h3>
+            {/* Rating Distribution Card */}
+            <div className="card p-8 space-y-6">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Rating Breakdown
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  How others have rated this profile
+                </p>
+              </div>
               <RatingDistribution distribution={ratingDistribution} />
             </div>
           </div>
         ) : (
-          <div className="card p-8 text-center mb-8">
-            <p className="text-lg mb-2">No reviews yet</p>
-            <p className="text-sm opacity-70">Be the first to rate {displayName}!</p>
+          <div className="card p-12 text-center mb-12 animate-fade-in">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 mb-6">
+              <MessageCircle className="h-8 w-8 text-gray-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              No Reviews Yet
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+              Be the first to share your experience with {displayName}! Your honest review helps others make informed decisions.
+            </p>
           </div>
         )}
 
         {/* Review Form */}
-        <div className="card p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-6">Submit a Review</h2>
+        <div className="card p-8 mb-12 animate-slide-up">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Share Your Experience
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Your anonymous review helps others in the Isla Vista community. Be honest, respectful, and constructive.
+            </p>
+          </div>
+          
           <ReviewForm
             defaultName={displayName}
             onSubmitted={async () => {
@@ -156,27 +203,86 @@ export default function ProfilePage() {
         </div>
 
         {/* Reviews List */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-6">Recent Reviews</h2>
+        <div className="animate-slide-up">
+          <div className="flex items-center gap-3 mb-8">
+            <MessageCircle className="h-6 w-6 text-gray-500" />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Recent Reviews
+            </h2>
+            {reviews.length > 0 && (
+              <span className="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium">
+                {reviews.length}
+              </span>
+            )}
+          </div>
+          
           {reviews.length === 0 ? (
-            <p className="text-center py-12 opacity-70">No reviews yet</p>
+            <div className="card p-12 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 mb-4">
+                <MessageCircle className="h-8 w-8 text-gray-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                No Reviews Yet
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Reviews will appear here once submitted and verified.
+              </p>
+            </div>
           ) : (
-            <div className="space-y-4">
-              {reviews.map((r) => (
-                <div key={r.id} className="card p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${i < r.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                      />
-                    ))}
-                    <span className="text-sm opacity-70 ml-2">
-                      <Calendar className="h-3 w-3 inline mr-1" />
-                      {new Date(r.created_at).toLocaleDateString()}
-                    </span>
+            <div className="space-y-6">
+              {reviews.map((review, index) => (
+                <div 
+                  key={review.id} 
+                  className="card p-6 hover-lift"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      {/* Rating Stars */}
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`h-5 w-5 ${
+                              i < review.rating 
+                                ? "fill-yellow-400 text-yellow-400" 
+                                : "text-gray-300 dark:text-gray-600"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      
+                      {/* Rating Badge */}
+                      <span className="px-2 py-1 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 text-sm font-medium">
+                        {review.rating}/5
+                      </span>
+                    </div>
+                    
+                    {/* Date */}
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                      <Calendar className="h-4 w-4" />
+                      {new Date(review.created_at).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </div>
                   </div>
-                  {r.comment && <p className="opacity-90">{r.comment}</p>}
+                  
+                  {/* Comment */}
+                  {review.comment && (
+                    <div className="prose prose-gray dark:prose-invert max-w-none">
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        "{review.comment}"
+                      </p>
+                    </div>
+                  )}
+                  
+                  {!review.comment && (
+                    <p className="text-gray-500 dark:text-gray-400 italic">
+                      No additional comment provided.
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

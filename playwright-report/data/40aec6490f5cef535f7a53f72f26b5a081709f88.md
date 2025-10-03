@@ -1,0 +1,95 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "🦝🌴 GauchoGirls" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e7] [cursor=pointer]: 🦝🌴 GauchoGirls
+        - generic [ref=e9]:
+          - img [ref=e10]
+          - textbox "Search for someone..." [ref=e13]
+        - navigation [ref=e14]:
+          - link "🏆 Leaderboard" [ref=e15] [cursor=pointer]:
+            - /url: /leaderboard
+            - text: 🏆
+            - generic [ref=e16] [cursor=pointer]: Leaderboard
+          - button "Toggle theme" [ref=e17]:
+            - img [ref=e19]
+        - generic [ref=e21]:
+          - button "Toggle theme" [ref=e22]:
+            - img [ref=e24]
+          - button "Toggle menu" [ref=e26]:
+            - img [ref=e27]
+    - main [ref=e28]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - generic [ref=e33]: 🦝🌴
+            - heading "GauchoGirls" [level=1] [ref=e34]
+          - paragraph [ref=e35]: Anonymously rate your experience with Isla Vista women
+          - paragraph [ref=e36]: Like RateMyProfessor, but for IV guys to rate IV girls
+        - link "View Leaderboard" [ref=e38] [cursor=pointer]:
+          - /url: /leaderboard
+          - img [ref=e39] [cursor=pointer]
+          - generic [ref=e42] [cursor=pointer]: View Leaderboard
+          - img [ref=e43] [cursor=pointer]
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - textbox "Search for someone special..." [ref=e51]
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - heading "Why Choose GauchoGirls?" [level=2] [ref=e55]
+          - paragraph [ref=e56]: The most trusted platform for honest, anonymous reviews in Isla Vista
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - img [ref=e60]
+            - generic [ref=e62]:
+              - heading "100% Anonymous" [level=3] [ref=e63]
+              - paragraph [ref=e64]: Your identity is never shared. Rate freely and honestly with complete privacy protection.
+          - generic [ref=e65]:
+            - img [ref=e67]
+            - generic [ref=e70]:
+              - heading "Real Reviews" [level=3] [ref=e71]
+              - paragraph [ref=e72]: See what others really think with verified ratings and authentic experiences.
+          - generic [ref=e73]:
+            - img [ref=e75]
+            - generic [ref=e78]:
+              - heading "Live Rankings" [level=3] [ref=e79]
+              - paragraph [ref=e80]: Discover top-rated profiles updated in real-time with dynamic leaderboards.
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]: 1000+
+          - generic [ref=e86]: Active Profiles
+        - generic [ref=e87]:
+          - generic [ref=e88]: 5000+
+          - generic [ref=e89]: Reviews Posted
+        - generic [ref=e90]:
+          - generic [ref=e91]: 100%
+          - generic [ref=e92]: Anonymous
+    - contentinfo [ref=e93]:
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - link "🦝🌴 GauchoGirls" [ref=e97] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=e98]: Anonymously rate your experience with Isla Vista women. Like RateMyProfessor, but for IV guys to rate IV girls.
+        - generic [ref=e99]:
+          - navigation [ref=e100]:
+            - link "Terms of Service" [ref=e101] [cursor=pointer]:
+              - /url: /tos
+            - link "Privacy Policy" [ref=e102] [cursor=pointer]:
+              - /url: /privacy
+            - link "Legal" [ref=e103] [cursor=pointer]:
+              - /url: /legal
+            - link "Contact" [ref=e104] [cursor=pointer]:
+              - /url: /contact
+          - paragraph [ref=e105]:
+            - text: GauchoGirls is
+            - emphasis [ref=e106]: not
+            - text: affiliated with UCSB
+  - button "Open Next.js Dev Tools" [ref=e112] [cursor=pointer]:
+    - img [ref=e113] [cursor=pointer]
+  - alert [ref=e116]
+```
