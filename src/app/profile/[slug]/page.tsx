@@ -2,7 +2,7 @@
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { Star, Share2, TrendingUp, Calendar, User, MessageCircle, Award } from "lucide-react";
+import { Star, Share2, TrendingUp, Calendar, User, MessageCircle } from "lucide-react";
 import { toast } from "react-hot-toast";
 import ReviewForm from "@/components/ReviewForm";
 import RatingDistribution from "@/components/RatingDistribution";
@@ -273,7 +273,7 @@ export default function ProfilePage() {
                   {review.comment && (
                     <div className="prose prose-gray dark:prose-invert max-w-none">
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                        "{review.comment}"
+                        &ldquo;{review.comment}&rdquo;
                       </p>
                     </div>
                   )}

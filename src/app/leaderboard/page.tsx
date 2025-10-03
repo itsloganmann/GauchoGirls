@@ -3,7 +3,7 @@
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Star, Trophy, TrendingUp, Clock, Filter, Users, Award } from "lucide-react";
+import { Star, Trophy, TrendingUp, Filter, Users, Award } from "lucide-react";
 
 type Profile = {
   slug: string;

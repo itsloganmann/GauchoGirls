@@ -3,6 +3,26 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertCircle, CheckCircle, Star, Send } from "lucide-react";
 
+type TurnstileRenderOptions = {
+  sitekey: string;
+  callback: (token: string) => void;
+  "error-callback": () => void;
+  "expired-callback": () => void;
+  theme?: "auto" | "light" | "dark";
+};
+
+type TurnstileApi = {
+  render: (container: HTMLElement, options: TurnstileRenderOptions) => string;
+  reset: (widgetId: string) => void;
+  remove: (widgetId: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
+
 interface ReviewFormProps {
   defaultName: string;
   onSubmitted?: (slug: string) => void;
@@ -24,6 +44,25 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
   const widgetContainerRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<string | null>(null);
 
+  const resetTurnstileWidget = () => {
+    setToken("");
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const turnstile = window.turnstile;
+    const widgetId = widgetIdRef.current;
+    if (!turnstile || !widgetId) {
+      return;
+    }
+
+    try {
+      turnstile.reset(widgetId);
+    } catch (error) {
+      console.error("Turnstile reset failed", error);
+    }
+  };
+
   // Load Turnstile script and render widget
   useEffect(() => {
     if (!siteKey) {
@@ -36,28 +75,40 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
     );
 
     function renderWidget() {
-      // @ts-expect-error turnstile is a global injected by the script
-      if (window.turnstile && widgetContainerRef.current && !widgetIdRef.current) {
-        // @ts-expect-error turnstile type from global
-        widgetIdRef.current = window.turnstile.render(widgetContainerRef.current, {
-          sitekey: siteKey,
-          callback: (tkn: string) => {
-            setToken(tkn);
-          },
-          "error-callback": () => {
-            setToken("");
-          },
-          "expired-callback": () => {
-            setToken("");
-          },
-          theme: "light",
-        });
+      if (typeof window === "undefined") {
+        return;
       }
+
+      const container = widgetContainerRef.current;
+      if (!container || widgetIdRef.current) {
+        return;
+      }
+
+      const turnstile = window.turnstile;
+      if (!turnstile) {
+        return;
+      }
+
+      const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+
+      widgetIdRef.current = turnstile.render(container, {
+        sitekey: siteKey,
+        callback: (tkn: string) => {
+          setToken(tkn);
+        },
+        "error-callback": () => {
+          setToken("");
+        },
+        "expired-callback": () => {
+          setToken("");
+        },
+        theme: prefersDark ? "dark" : "light",
+      });
     }
 
     if (existingScript) {
       // Script already present; render immediately or when ready
-      if (typeof (window as any).turnstile !== "undefined") {
+      if (typeof window !== "undefined" && window.turnstile) {
         renderWidget();
       } else {
         existingScript.addEventListener("load", renderWidget);
@@ -75,12 +126,17 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
 
     return () => {
       script.removeEventListener("load", renderWidget);
-      // @ts-expect-error global
-      if (widgetIdRef.current && window.turnstile) {
-        try {
-          // @ts-expect-error global
-          window.turnstile.remove(widgetIdRef.current);
-        } catch {}
+      if (typeof window !== "undefined") {
+        const turnstile = window.turnstile;
+        const widgetId = widgetIdRef.current;
+        if (turnstile && widgetId) {
+          try {
+            turnstile.remove(widgetId);
+          } catch (error) {
+            console.error("Turnstile removal failed", error);
+          }
+          widgetIdRef.current = null;
+        }
       }
     };
   }, [siteKey]);
@@ -122,14 +178,7 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
         } else {
           setErrorMessage("Submission failed. Please try again.");
         }
-        // @ts-expect-error global
-        if (widgetIdRef.current && window.turnstile) {
-          try {
-            // @ts-expect-error global
-            window.turnstile.reset(widgetIdRef.current);
-          } catch {}
-        }
-        setToken("");
+        resetTurnstileWidget();
         return;
       }
 
@@ -139,16 +188,11 @@ export default function ReviewForm({ defaultName, onSubmitted }: ReviewFormProps
         onSubmitted(data.slug);
       }
       setComment("");
-      // @ts-expect-error global
-      if (widgetIdRef.current && window.turnstile) {
-        try {
-          // @ts-expect-error global
-          window.turnstile.reset(widgetIdRef.current);
-        } catch {}
-      }
-      setToken("");
-    } catch (err) {
+      resetTurnstileWidget();
+    } catch (error) {
+      console.error("Unexpected error while submitting review", error);
       setErrorMessage("Unexpected error. Please try again.");
+      resetTurnstileWidget();
     } finally {
       setSubmitting(false);
     }
